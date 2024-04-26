@@ -1,0 +1,30 @@
+.login-background {
+  background-image: url("../assets/hero1.png");
+  background-size: cover;
+  position: absolute;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+.login-content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+}
+.card-body {
+  background-color: rgb(114, 87, 87);
+  z-index: 3;
+}
+.div-container {
+  width: 100%;
+  z-index: 1;
+}
