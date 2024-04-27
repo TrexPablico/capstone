@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const CommentList = () => {
+  const api = http();
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [editingCommentId, setEditingCommentId] = useState(null);
@@ -12,7 +13,7 @@ const CommentList = () => {
 
   const fetchComments = async () => {
     try {
-      const response = await axios.get("/comments");
+      const response = await api.get("/comments");
       setComments(response.data);
     } catch (error) {
       console.error("Error fetching comments:", error);
@@ -22,7 +23,7 @@ const CommentList = () => {
 
   const handleAddComment = async () => {
     try {
-      await axios.post("/comments", {
+      await api.post("/comments", {
         content: newComment,
       });
       setNewComment("");
@@ -36,7 +37,7 @@ const CommentList = () => {
 
   const handleEditComment = async (id, updatedContent) => {
     try {
-      await axios.put(`/comments/${id}`, {
+      await api.put(`/comments/${id}`, {
         content: updatedContent,
       });
       setEditingCommentId(null);
@@ -50,7 +51,7 @@ const CommentList = () => {
 
   const handleDeleteComment = async (id) => {
     try {
-      await axios.delete(`/comments/${id}`);
+      await api.delete(`/comments/${id}`);
       fetchComments();
       alert("Comment deleted successfully.");
     } catch (error) {

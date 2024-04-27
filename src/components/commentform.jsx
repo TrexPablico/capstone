@@ -2,22 +2,23 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 
 const CommentForm = () => {
+  const api = http();
   const [comment, setComment] = useState("");
 
   const handleChange = (event) => {
     setComment(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Here you can add your logic to handle the submission of the comment
+    const response = await api.post("/comments");
     console.log("Comment submitted:", comment);
     // Reset the comment field after submission
     setComment("");
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form>
       <Form.Group controlId="commentForm">
         <Form.Label>Add a comment:</Form.Label>
         <Form.Control
@@ -27,7 +28,7 @@ const CommentForm = () => {
           onChange={handleChange}
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button onClick={handleSubmit} variant="primary" type="submit">
         Submit
       </Button>
     </Form>
