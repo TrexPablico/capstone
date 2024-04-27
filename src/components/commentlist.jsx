@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import useApi from "../utilities/http";
 
 const CommentList = () => {
-  const api = http();
+  const api = useApi();
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [editingCommentId, setEditingCommentId] = useState(null);
@@ -64,44 +64,39 @@ const CommentList = () => {
     <div>
       <h2>Comments</h2>
       <ul>
-        {comments.map((comment) => (
-          <li key={comment.id}>
-            {editingCommentId === comment.id ? (
-              <>
-                <input
-                  type="text"
-                  value={comment.content}
-                  onChange={(e) =>
-                    handleEditComment(comment.id, e.target.value)
-                  }
-                />
-                <button onClick={() => setEditingCommentId(null)}>
-                  Cancel
-                </button>
-              </>
-            ) : (
-              <>
-                <p>{comment.content}</p>
-                <button onClick={() => setEditingCommentId(comment.id)}>
-                  Edit
-                </button>
-                <button onClick={() => handleDeleteComment(comment.id)}>
-                  Delete
-                </button>
-              </>
-            )}
-          </li>
-        ))}
+        {comments ? (
+          comments.map((comment) => (
+            <li key={comment.id}>
+              {editingCommentId === comment.id ? (
+                <>
+                  <input
+                    type="text"
+                    value={comment.content}
+                    onChange={(e) =>
+                      handleEditComment(comment.id, e.target.value)
+                    }
+                  />
+                  <button onClick={() => setEditingCommentId(null)}>
+                    Cancel
+                  </button>
+                </>
+              ) : (
+                <>
+                  <p>{comment.content}</p>
+                  <button onClick={() => setEditingCommentId(comment.id)}>
+                    Edit
+                  </button>
+                  <button onClick={() => handleDeleteComment(comment.id)}>
+                    Delete
+                  </button>
+                </>
+              )}
+            </li>
+          ))
+        ) : (
+          <li>No comments available</li>
+        )}
       </ul>
-      <div>
-        <input
-          type="text"
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-          placeholder="Enter comment"
-        />
-        <button onClick={handleAddComment}>Add Comment</button>
-      </div>
     </div>
   );
 };

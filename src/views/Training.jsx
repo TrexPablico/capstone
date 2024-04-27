@@ -3,8 +3,8 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import backgroundImage from "../assets/solo2.png";
-import CommentForm from "./commentform";
-import CommentList from "./commentlist";
+import CommentForm from "../components/commentform";
+import CommentList from "../components/commentlist";
 
 const Training = () => {
   return (

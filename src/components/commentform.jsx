@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import useApi from "../utilities/http";
 
 const CommentForm = () => {
-  const api = http();
+  const api = useApi();
   const [comment, setComment] = useState("");
 
   const handleChange = (event) => {
@@ -18,7 +19,7 @@ const CommentForm = () => {
   };
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Form.Group controlId="commentForm">
         <Form.Label>Add a comment:</Form.Label>
         <Form.Control
@@ -28,7 +29,7 @@ const CommentForm = () => {
           onChange={handleChange}
         />
       </Form.Group>
-      <Button onClick={handleSubmit} variant="primary" type="submit">
+      <Button variant="primary" type="submit">
         Submit
       </Button>
     </Form>
