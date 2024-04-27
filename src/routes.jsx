@@ -5,6 +5,8 @@ import Register from "./views/Register";
 import Training from "./views/Training";
 import Flexibility from "./views/flexibility";
 import Nutrition from "./views/nutrition";
+import CommentForm from "./views/commentform";
+import CommentList from "./views/commentlist";
 
 const routes = [
   {
@@ -41,6 +43,16 @@ const routes = [
     name: "Nutrition",
     path: "/nutrition",
     element: <Nutrition />,
+  },
+  {
+    name: "Commentlist",
+    path: "/commentlist",
+    element: <CommentList />,
+  },
+  {
+    name: "Commentform",
+    path: "/commentform",
+    element: <CommentForm />,
   },
 ];
 

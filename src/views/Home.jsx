@@ -180,31 +180,29 @@ const Home = () => {
           </Col>
         </Row>
       </Container>
-      <div
+
+      <Container
         fluid
+        className="d-flex align-items-center justify-content-center h-100 px-1"
         style={{
+          padding: "0",
           backgroundColor: "#4D4D4D",
           height: "15vh",
           width: "100%",
-          paddingLeft: "0",
+          padding: "0",
           margin: "0",
         }}
       >
-        <Container
-          fluid
-          className="d-flex align-items-center justify-content-center h-100 px-1"
-          style={{ paddingLeft: "0" }}
-        >
-          <Row style={{ padding: "0" }}>
-            <Col style={{ padding: "0" }}>
-              <h1 style={{ color: "white", textAlign: "center" }}>
-                Unlock Your Potential: Explore Fitness and Embrace a Healthier
-                You!
-              </h1>
-            </Col>
-          </Row>
-        </Container>
-      </div>
+        <Row style={{ padding: "0" }}>
+          <Col style={{ padding: "0" }}>
+            <h1 style={{ color: "white", textAlign: "center" }}>
+              Unlock Your Potential: Explore Fitness and Embrace a Healthier
+              You!
+            </h1>
+          </Col>
+        </Row>
+      </Container>
+
       <div style={{ padding: "0" }}>
         <Container fluid style={{ padding: "0" }}>
           <Row className="h-100 align-items-center justify-content-center">
@@ -419,6 +417,8 @@ const Home = () => {
                 updates on new fitness articles.
               </h5>
               <Button
+                as={Link}
+                to="/register"
                 className="mt-5"
                 variant="primary"
                 style={{

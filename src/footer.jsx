@@ -101,7 +101,7 @@ const FooterComponent = () => {
           className="text-center p-3 bg-dark"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
         >
-          &copy; {new Date().getFullYear()} Your Company. All rights reserved.
+          &copy; {new Date().getFullYear()} GymHub. All rights reserved.
         </div>
       </footer>
     </div>

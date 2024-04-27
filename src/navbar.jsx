@@ -60,6 +60,8 @@ const NavbarComponent = () => {
               About Us
             </Button>
             <Button
+              as={Link}
+              to="/comments"
               variant="link"
               href="#gallery"
               style={{
@@ -70,13 +72,13 @@ const NavbarComponent = () => {
               onMouseEnter={(e) => (e.target.style.color = "#ff3e3e")}
               onMouseLeave={(e) => (e.target.style.color = "#fff")}
             >
-              Contact
+              Suggestions
             </Button>
           </Nav>
           <Form className="d-flex">
             <Button
               as={Link}
-              to="/login"
+              to="/"
               variant="light"
               style={{ transition: "0.3s ease-in-out", marginRight: "10px" }}
               onMouseEnter={(e) => {
