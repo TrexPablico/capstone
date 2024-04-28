@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from "react";
 import useApi from "../utilities/http";
+import commentform from "./commentform";
 
 const CommentList = () => {
   const api = useApi();
+  // const user = JSON.parse(getItem("user"));
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [editingCommentId, setEditingCommentId] = useState(null);
+  const [putComment, setPutComment] = useState([]);
 
   useEffect(() => {
     fetchComments();
   }, []);
 
-  const fetchComments = async () => {
-    try {
-      const response = await api.get("/comments");
-      setComments(response.data);
-    } catch (error) {
-      console.error("Error fetching comments:", error);
-      // Handle error
-    }
-  };
+  async function fetchComments() {
+    const { data } = await api.get("/comments");
+    setPutComment(data);
+  }
+  console.log(putComment);
 
   const handleAddComment = async () => {
     try {
@@ -63,7 +62,11 @@ const CommentList = () => {
   return (
     <div>
       <h2>Comments</h2>
-      <ul>
+      {putComment.map((addComment, index) => {
+        return <p key={index}>{addComment.content}</p>;
+      })}
+
+      {/* <ul>
         {comments ? (
           comments.map((comment) => (
             <li key={comment.id}>
@@ -96,7 +99,7 @@ const CommentList = () => {
         ) : (
           <li>No comments available</li>
         )}
-      </ul>
+      </ul> */}
     </div>
   );
 };

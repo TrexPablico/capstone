@@ -4,12 +4,12 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import backgroundImage from "../assets/solo2.png";
 import CommentForm from "../components/commentform";
-import CommentList from "../components/commentlist";
+// import CommentList from "../components/commentlist";
 
 const Training = () => {
   return (
     <>
-      <Container fluid style={{ padding: "0" }}>
+      <div>
         <Row>
           <Col
             style={{
@@ -26,6 +26,7 @@ const Training = () => {
               backgroundColor: "#1F244D",
               height: "160vh",
               color: "#fff",
+              padding: "50px",
             }}
           >
             <h1 className="mt-2">Phase 1 (Week 1-6)</h1>
@@ -99,9 +100,9 @@ const Training = () => {
             </h5>
           </Col>
         </Row>
-      </Container>
+      </div>
       <CommentForm />
-      <CommentList />
+      {/* <CommentList /> */}
     </>
   );
 };

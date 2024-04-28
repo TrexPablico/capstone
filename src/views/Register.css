@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: center;
 }
-.card-body {
+.registerbody {
   background-color: rgb(114, 87, 87);
   z-index: 3;
 }
