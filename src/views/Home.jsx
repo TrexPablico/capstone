@@ -27,15 +27,27 @@ const Home = () => {
         <Carousel style={{ padding: "0", margin: "0" }}>
           <Carousel.Item style={{ padding: "0" }}>
             <img src={barbell1} className="d-block w-100" />
-            <Carousel.Caption></Carousel.Caption>
+            <Carousel.Caption style={{ marginBottom: "250px" }}>
+              <h1>Move. Sweat. Thrive. Fitness fuels life.</h1>
+            </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
             <img src={barbell2} className="d-block w-100" />
-            <Carousel.Caption></Carousel.Caption>
+            <Carousel.Caption style={{ marginBottom: "250px" }}>
+              <h1>
+                Every healthy choice is a step towards a brighter, stronger you.
+                Keep going!
+              </h1>
+            </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
             <img src={barbell3} className="d-block w-100" />
-            <Carousel.Caption></Carousel.Caption>
+            <Carousel.Caption style={{ marginBottom: "250px" }}>
+              <h1>
+                Small steps, big impact. Your health journey starts with each
+                positive choice. Keep pushing forward!
+              </h1>
+            </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
       </Container>

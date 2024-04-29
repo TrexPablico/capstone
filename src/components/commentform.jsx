@@ -5,6 +5,8 @@ import useApi from "../utilities/http";
 import { useEffect } from "react";
 import Card from "react-bootstrap/Card";
 
+import { toast } from "react-toastify";
+
 import Modal from "react-bootstrap/Modal";
 
 const CommentForm = () => {
@@ -14,7 +16,6 @@ const CommentForm = () => {
   const [comment, setComment] = useState("");
   const [putComment, setPutComment] = useState([]);
   const [openModal, setOpenModal] = useState(false);
-  const [currentComment, setCurrentComment] = useState();
 
   useEffect(() => {
     fetchComments();
@@ -30,16 +31,15 @@ const CommentForm = () => {
     try {
       const body = {
         content: comment,
-        user_id: user.id,
       };
 
       const { data } = await api.post("/comments", body);
       toast.success(data.message);
       setComment("");
+      fetchComments();
     } catch (error) {
       console.log(error);
     }
-    fetchComments();
   }
   async function fetchComments() {
     const { data } = await api.get("/comments");
@@ -49,18 +49,18 @@ const CommentForm = () => {
   const handleEditComment = async (index) => {
     try {
       const confirmed = window.confirm(
-        "Are you sure you want to edit this term?"
+        "Are you sure you want to edit this comment?"
       );
       if (confirmed) {
-        const commentToUpdate = terms[index];
+        const commentToUpdate = putComment[index];
 
-        const newComment = prompt("Enter the new title for the term:");
+        const newComment = prompt("Enter the new comment:");
         if (!newComment) {
           return;
         }
 
         if (newComment.trim() === "") {
-          alert("Title cannot be empty. Please provide a valid title.");
+          alert("Comment cannot be empty. Please provide a valid comment.");
           return;
         }
         const updatedData = {
@@ -69,13 +69,34 @@ const CommentForm = () => {
         };
 
         await api.put(`/comments/${commentToUpdate.id}`, updatedData);
-        const updatedComment = await api.get("/comments");
-        setTerms(updatedComment);
+        const updatedComments = [...putComment];
+        updatedComments[index] = { ...commentToUpdate, ...updatedData };
+        setPutComment(updatedComments);
+
+        alert("Comment updated successfully!");
       }
     } catch (error) {
-      //  console.error("Error editing term:", error);
+      console.error("Error editing comment:", error);
     }
-    setOpenModal(true);
+  };
+
+  const handleDeleteComment = async (index) => {
+    try {
+      const confirmed = window.confirm(
+        "Are you sure you want to delete this comment?"
+      );
+      if (confirmed) {
+        const commentToDelete = putComment[index];
+        await api.delete(`/comments/${commentToDelete.id}`);
+
+        const updatedComments = putComment.filter(
+          (comment) => comment.id !== commentToDelete.id
+        );
+        setPutComment(updatedComments);
+      }
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+    }
   };
 
   return (
@@ -131,7 +152,9 @@ const CommentForm = () => {
                       >
                         Edit
                       </Button>
-                      <Button>Delete</Button>
+                      <Button onClick={() => handleDeleteComment(index)}>
+                        Delete
+                      </Button>
                     </div>
                   </Card.Body>
                 </Card>
@@ -139,26 +162,6 @@ const CommentForm = () => {
             ))}
           </Row>
         </Container>
-        <div
-          open={openModal}
-          className="modal show"
-          style={{ display: "block", position: "initial" }}
-        >
-          <Modal.Dialog>
-            <Modal.Header closeButton>
-              <Modal.Title>Modal title</Modal.Title>
-            </Modal.Header>
-
-            <Modal.Body>
-              <p>Modal body text goes here.</p>
-            </Modal.Body>
-
-            <Modal.Footer>
-              <Button variant="secondary">Close</Button>
-              <Button variant="primary">Save changes</Button>
-            </Modal.Footer>
-          </Modal.Dialog>
-        </div>
       </Container>
     </>
   );
